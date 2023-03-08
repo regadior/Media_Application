@@ -1,31 +1,37 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
 import lupa from '../icons/lupa.png';
 import './Filtro.css';
-const RAWG_API_KEY=proces.env.RAWG_API_KEY;
-const RAWG_BASE_URL=proces.env.RAWG_BASE_URL;
+
 function Filtrobuscar() {
+    const RAWG_API_KEY = process.env.REACT_APP_RAWG_API_KEY;
+    const RAWG_BASE_URL = process.env.REACT_APP_RAWG_BASE_URL;
     const [inputSearch, setinputSearch] = useState("");
     const [resultadoJuego, setresultadoJuego] = useState([]);
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         setinputSearch(e.target.value);
-        console.log("Estas escribiendo", e.target.value);
-    }
-    const onSubmit = (e) =>{
         e.preventDefault();
-        useEffect(() =>{
-            axios.get()
-        })
+        axios.get(`${RAWG_BASE_URL}key=${RAWG_API_KEY}&search=${inputSearch}&ordering=rating`)
+            .then(response => {
+                setresultadoJuego(response.data.results)
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (
-        <div class="Filtrobuscar">
+        <div className='Filtrobuscar'>
             <input type='text' placeholder='Buscar' className='Filtrobuscar_input' value={inputSearch} onChange={handleChange}></input>
-            <button type='submit' className='Filtrobuscar_boton' onSubmit={onSubmit}>
-                <img src={lupa}></img>
-            </button>
+
+            {resultadoJuego.map(game => (
+                <div key={game.id} className='contenido'>
+                    <h3>{game.name}</h3>
+                </div>
+            ))}
         </div>
     )
 }
+
 
 export default Filtrobuscar;
