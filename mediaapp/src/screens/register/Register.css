@@ -82,10 +82,10 @@
 
 .Register_boton input:hover {
     box-shadow:
-        0 0 0px #0394f4,
-        0 0 4px #0394f4,
-        0 0 9px #0394f4,
-        0 0 15px #0394f4;
+        0 0 0px #013050,
+        0 0 4px #00243b,
+        0 0 9px #00375c,
+        0 0 15px #005892;
 }
 
 .Register_boton input[type="submit"] {
