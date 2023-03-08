@@ -6,8 +6,7 @@ use mediaapp_sql;
 create table USUARIO(
 id_usuario int auto_increment primary key,
 nombre varchar(50) not null,
-apellido1 varchar(100) not null,
-apellido2 varchar(100) not null,
+apellido varchar(100) not null,
 nick varchar(50) not null,
 mail varchar(256) not null,
 contraseña varchar(3000) not null,
