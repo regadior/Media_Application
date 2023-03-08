@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.Filtrobuscar{
+    display: flex;
+
+}
+.Filtrobuscar_input{
+    
+}
+
+.Filtrobuscar_boton{
+    
+}
+.Filtrobuscar_boton:hover{
+   cursor: pointer; 
+}
+.Filtrobuscar_boton img{
+    width: 20px;
+}

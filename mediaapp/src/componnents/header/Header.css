@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header{
+    background-color: #0B252E;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.header2{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header_logo{
+
+}
+
+.header_nav{
+    width: 200px;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    
+}
+.header_Link{
+    text-decoration: none;
+    color: azure;
+}
+
+.header_perfil img{
+    width: 45%;
+
+}
+
+
+@media only screen and (min-width: 650px) and (max-width: 800px) {
+
+
+}
