@@ -1,6 +1,6 @@
 import json
 from .models import *
-from django.core.validators import validate_length #Funcion para comprobar la longitud
+from django.core.validators import MaxLengthValidator  #Funcion para comprobar la longitud
 import re #Módulo de Python que proporciona soporte para expresiones regulares
 import jwt
 import logging
@@ -46,16 +46,16 @@ def register(request):
             return JsonResponse({'error': 'Faltan parámetros (campos incompletos)'}, status=400)
 
         # COMPROBAR QUE EL NOMBRE TIENE DE 3 A 25 DIGITOS
-        if not(1<= len(nombre)<= 25):
-            return JsonResponse({'error': 'El campo Nombre debe tener entre 1 y 25 digitos'}, status=400)
+        if not(3<= len(nombre)<= 25):
+            return JsonResponse({'error': 'El campo Nombre debe tener entre 3 y 25 digitos'}, status=400)
         
-        # COMPROBAR QUE EL APELLIDO ESTE EN EL FORMATO "apel1 apel2"
-        if not (1<= len(apell)<= 25):
-            return JsonResponse({'error': 'El campo Apellido debe tener entre 1 y 25 digitos'}, status=400)
+        # COMPROBAR QUE EL APELLIDO ESTE ENTRE 2Y 25 CARACTERES"
+        if not (2<= len(apell)<= 25):
+            return JsonResponse({'error': 'El campo Apellido debe tener entre 2 y 25 digitos'}, status=400)
 
         # COMPROBAR QUE EL NOMBRE DE USUARIO TIENE DE 3 A 20 DIGITOS
-        if not(3<= len(nick)<= 25):
-            return JsonResponse({'error': 'El campo Nombre de usuario debe tener entre 1 y 25 digitos'}, status=400)
+        if not(3<= len(nick)<= 20):
+            return JsonResponse({'error': 'El campo Nombre de usuario debe tener entre 1 y 20 digitos'}, status=400)
 
         # COMPROBAR QUE EL EMAIL ES VÁLIDO
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
@@ -70,18 +70,19 @@ def register(request):
             return JsonResponse({'error': 'El campo Contraseña de usuario debe tener entre 5 y 20 digitos'}, status=400)
 
         # Comprobamos que el usuario no exista ya en la base de datos
-        if usuario.objects.filter(nick=nick).exists():
+        if Usuario.objects.filter(nick=nick).exists():
             return JsonResponse({'error': 'El usuario con este nombre de usuario ya existe'}, status=409)
 
         #Comprobamos que el correo no exista ya en la base de datos
-        if usuario.objects.filter(mail=email).exists():
+        if Usuario.objects.filter(mail=email).exists():
             return JsonResponse({'error': 'El usuario con este correo ya existe'}, status=409)
 
         # Crear el usuario
         hashed_password = hash_password(pass1)
-        usuario = usuario(nombre=nombre, apellido=apell, nick=nick, mail=email, contraseña=hashed_password, descripcion="Escribe aqui tu descripción",id_rol=3)#el rol por defecto de usuer normal es el 3
+        rol_usuario = RolUsuario.objects.get(id_rol=3)
+        usuario = Usuario(nombre=nombre, apellido=apell, nick=nick, mail=email, contraseña=hashed_password, descripcion="Escribe aqui tu descripción",id_rol=rol_usuario)#el rol por defecto de usuer normal es el 3
         usuario.save()
-
+        #RESPONDE UN 20OK
         return JsonResponse({'OK': 'El usuario registrado correctamente'}, status=200)
     return HttpResponse(status=405)
 
@@ -94,7 +95,7 @@ def login(request):
         pass1 = data.get('pass1')
         try:
             #SE COMPRUEBA QUE EL USUARIO EXISTA SEGUN SU NOMBRE DE USUARIO
-            usuario = usuario.objects.get(nick=nick)
+            usuario = Usuario.objects.get(nick=nick)
             #SE COMPRUBA QUE LA CONTRASEÑA ALMACENADA ES IGUAL A LA INTRODUCIDA
             if hash_password(pass1) == usuario.contraseña:
                 usuario.session_token = generate_token(usuario)
@@ -102,7 +103,7 @@ def login(request):
             usuario.save()
             #ENVIA EL TOKEN DE SESION CON UN 200 OK EN UN JSON
             return JsonResponse({'session_token': usuario.session_token}, status=200)
-        except usuario.DoesNotExist:
+        except Usuario.DoesNotExist:
             return JsonResponse({'error': 'La contraseña o el usuario no existen'}, status=400)
     return HttpResponse(status=405)
 

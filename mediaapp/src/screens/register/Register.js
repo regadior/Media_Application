@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Register.css';
 function Register() {
-  const [error, setError] = useState("");
+  const [error1, setError1] = useState("");
+  const [error2, setError2] = useState("");
+  const [error3, setError3] = useState("");
+  const [error4, setError4] = useState("");
+  const [error5, setError5] = useState("");
+  const [error6, setError6] = useState("");
+  const [error7, setError7] = useState("");
   const [nombre, setNombre] = useState("");
   const [apell, setApell] = useState("");
   const [nick, setNick] = useState("");
@@ -11,9 +17,59 @@ function Register() {
   const [pass2, setPass2] = useState("");
 
 
+  const validateForm = () => {
+    setError1("");
+    setError2("");
+    setError3("");
+    setError4("");
+    setError5("");
+    setError6("");
+    setError7("");
+    let valid = true;
+    //COMPROBAR QUE EL NOMBRE TIENE DE 3 A 25 DIGITOS
+    if (nombre.length < 3 || nombre.length > 25) {
+      setError1("* El nombre debe tener entre 3 y 25 caracteres.");
+      valid = false;
+    }
+    //COMPROBAR QUE EL APELLIDO ESTE ENTRE 2Y 25 CARACTERES"
+    if (apell.length < 2 || apell.length > 25) {
+      setError2("* El apellido debe tener entre 2 y 25 caracteres.");
+      valid = false;
+    }
+    //COMPROBAR QUE EL NOMBRE DE USUARIO TIENE DE 3 A 20 DIGITOS
+    if (nick.length < 3 || nick.length > 20) {
+      setError3("* El nombre de usuario debe tener entre 3 y 20 caracteres.");
+      valid = false;
+    }
+    //COMPROBAR QUE EL EMAIL ES VÁLIDO
+    if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+      setError4("* El correo electrónico no es válido.");
+      valid = false;
+    }
+    //COMPROBAR QUE LA CONTRASEÑA1 DE USUARIO TIENE DE 5 A 20 DIGITOS
+    if (pass1.length < 5 || pass1.length > 20) {
+      setError5("* La contraseña debe tener entre 5 y 20 caracteres.");
+      valid = false;
+    }
+    //COMPROBAR QUE LA CONTRASEÑA2 DE USUARIO TIENE DE 5 A 20 DIGITOS
+    if (pass2.length < 5 || pass2.length > 20) {
+      setError6("* La contraseña debe tener entre 5 y 20 caracteres.");
+      valid = false;
+    }
+    //COMPROBAR QUE LAS CONTRASEÑAS COINCIDEN
+    if (pass1!==pass2) {
+      setError7("* Las contraseñas no coinciden.");
+      valid = false;
+    }
+
+    return valid;
+  }
+
   const handleSubmit = async e => {
     e.preventDefault();
-
+    if (!validateForm()) {
+      return;
+    }
     try {
       const res = await axios.post('http://localhost:8000/api/register/', {
         nombre,
@@ -23,18 +79,14 @@ function Register() {
         pass1,
         pass2,
       });
-      setError('');
     } catch (err) {
-      if (err.response.status === 400) {
-        setError('Faltan parámetros');
-      } else if (err.response.status === 409) {
-        setError('El usuario ya existe');
+      if (err.response) {
+        console.log(err.response.data.error);
       } else {
-        setError('Ocurrió un error al registrar al usuario');
+        console.log('Error:', err.message);
       }
     }
   };
-
   return (
     <div className='Register'>
       <form onSubmit={handleSubmit} className='Register_form' >
@@ -42,40 +94,43 @@ function Register() {
         <div className='Register_box'>
           <input type="text" id="Register_nombre" name="nombre" value={nombre} onChange={e => setNombre(e.target.value)} required></input>
           <label>Nombre</label>
-
+          <p className='Register_error_sesion'>{error1}</p>
         </div>
 
         <div className='Register_box'>
           <input type="text" id="Register_apellido" name="apellido" value={apell} onChange={e => setApell(e.target.value)} required></input>
           <label>Apellidos</label>
-
+          <p className='Register_error_sesion'>{error2}</p>
         </div>
 
         <div className='Register_box'>
           <input type="text" id="Register_nickname" name="nickname" value={nick} onChange={e => setNick(e.target.value)} required></input>
           <label>Nombre de usuario</label>
-
+          <p className='Register_error_sesion'>{error3}</p>
         </div>
 
         <div className='Register_box'>
           <input type="text" id="Register_email" name="email" value={email} onChange={e => setEmail(e.target.value)} required></input>
           <label>Email</label>
-
+          <p className='Register_error_sesion'>{error4}</p>
         </div>
 
         <div className='Register_box'>
           <input type="password" id="Register_contraseña1" name="contraseña1" value={pass1} onChange={e => setPass1(e.target.value)} required></input>
           <label>Contraseña</label>
+          <p className='Register_error_sesion'>{error5}</p>
+          <p className='Register_error_sesion'>{error7}</p>
         </div>
 
         <div className='Register_box'>
           <input type="password" id="Register_contraseña2" name="contraseña2" value={pass2} onChange={e => setPass2(e.target.value)} required></input>
           <label>Confirmar Contraseña</label>
-
+          <p className='Register_error_sesion'>{error6}</p>
+          <p className='Register_error_sesion'>{error7}</p>
         </div>
-        <div className='Register_boton'>
-        <input type="submit" value="Registrarse"></input>
 
+        <div className='Register_boton'>
+          <input type="submit" value="Registrarse"></input>
         </div>
       </form>
     </div>
