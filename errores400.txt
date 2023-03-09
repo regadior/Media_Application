@@ -1,0 +1,59 @@
+A continuación se presentan algunos errores HTTP que comienzan desde el código de respuesta "400 Bad Request" y su posible significado:
+
+400 Bad Request: La solicitud contenía una sintaxis errónea o no se podía entender.
+
+401 Unauthorized: El cliente no proporcionó credenciales válidas o no está autorizado para acceder al recurso solicitado.
+
+402 Payment Required: Reservado para uso futuro.
+
+403 Forbidden: El servidor entendió la solicitud, pero se niega a autorizarla.
+
+404 Not Found: El servidor no pudo encontrar el recurso solicitado.
+
+405 Method Not Allowed: El método de solicitud utilizado no es compatible con el recurso solicitado.
+
+406 Not Acceptable: El servidor no puede responder con el tipo de contenido que el cliente ha solicitado en la cabecera "Accept".
+
+407 Proxy Authentication Required: El cliente debe autenticarse con el proxy antes de enviar una solicitud.
+
+408 Request Timeout: El servidor esperó demasiado tiempo para recibir la solicitud.
+
+409 Conflict: La solicitud no pudo ser completada debido a un conflicto con el estado actual del recurso.
+
+410 Gone: El recurso solicitado ya no está disponible en el servidor y no se conoce una dirección de reenvío.
+
+411 Length Required: La solicitud no especificó la longitud del contenido, lo que es necesario en este caso.
+
+412 Precondition Failed: El servidor no cumplió con una de las condiciones que el cliente proporcionó en la cabecera de la solicitud.
+
+413 Payload Too Large: La solicitud es demasiado grande para ser procesada por el servidor.
+
+414 URI Too Long: La URL de la solicitud es demasiado larga y no se puede procesar.
+
+415 Unsupported Media Type: El tipo de medio de la solicitud no es compatible.
+
+416 Range Not Satisfiable: El servidor no puede satisfacer el rango de la solicitud.
+
+417 Expectation Failed: El servidor no puede satisfacer los requisitos de la cabecera "Expect" en la solicitud.
+
+418 I'm a teapot: Reservado para uso futuro.
+
+421 Misdirected Request: La solicitud fue dirigida a un servidor inadecuado.
+
+422 Unprocessable Entity: La solicitud estaba bien formada, pero no se pudo procesar debido a errores semánticos.
+
+423 Locked: El recurso solicitado está bloqueado.
+
+424 Failed Dependency: La solicitud falló debido a una falla en la solicitud anterior.
+
+426 Upgrade Required: El cliente debe cambiar a un protocolo diferente.
+
+428 Precondition Required: El servidor requiere que el cliente incluya una cabecera de "Precondición" para la solicitud.
+
+429 Too Many Requests: El usuario ha enviado demasiadas solicitudes en un período de tiempo determinado.
+
+431 Request Header Fields Too Large: El servidor no puede procesar la solicitud porque una o más de las cabeceras exceden el límite de tamaño.
+
+451 Unavailable For Legal Reasons: El acceso al recurso solicitado está prohibido por motivos legales.
+
+Es importante tener en cuenta que estos errores HTTP pueden ser generados por diversas causas y que la causa exacta del error puede variar dependiendo del contexto y la implementación específica del servidor y la aplicación web.

@@ -18,7 +18,12 @@ function Register() {
 
     try {
       const res = await axios.post('http://localhost:8000/api/register/', {
-
+        nombre,
+        apell,
+        nick,
+        email,
+        pass1,
+        pass2,
       });
       setError('');
     } catch (err) {
