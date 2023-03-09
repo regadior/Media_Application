@@ -20,4 +20,5 @@ from mediaapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/register/', views.register, name='register'),
+    path('api/login/', views.login, name='login'),
 ]

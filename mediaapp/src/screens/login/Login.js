@@ -12,7 +12,8 @@ function Login() {
 
         try {
             const res = await axios.post('http://localhost:8000/api/login/', {
-
+            nick,
+            pass1,
             });
             setError('');
         } catch (err) {

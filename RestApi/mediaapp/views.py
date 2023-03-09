@@ -12,11 +12,22 @@ from django.forms.models import model_to_dict
 # Create your views here.
 
 
-#VISTA PARA REGISTRAR A UN USUARIO AL ENDPOINT http://localhost:8000/api/register/
-
+#FUNCION PARAA HASHEAR LA CONTRASEÑA
 def hash_password(pass1):
     return hashlib.sha256(pass1.encode()).hexdigest()
 
+#FUNCION QUE GENERA UN TOKEN DE SESION
+def generate_token(usuario):
+    payload = {
+        'user_id': usuario.id_usuario,
+        'username': usuario.nick
+    }
+    secret = 'secreto'
+    token = jwt.encode(payload, secret, algorithm='HS256')
+    # token = token.decode('utf-8')
+    return token
+
+#VISTA PARA REGISTRAR A UN USUARIO AL ENDPOINT http://localhost:8000/api/register/
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
@@ -52,30 +63,26 @@ def register(request):
         return JsonResponse({'OK': 'El usuario registrado correctamente'}, status=200)
     return HttpResponse(status=405)
 
-
+#VISTA PARA INICIAR SESION DE UN USUARIO AL ENDPOINT http://localhost:8000/api/login/
 @csrf_exempt
-def start_session_view(request):
+def login(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
+        nick = data.get('nick')
+        pass1 = data.get('pass1')
         try:
-            usuario = usuario.objects.get(nickname=username)
-            if hash_password(password) == usuario.pass_field:
+            #SE COMPRUEBA QUE EL USUARIO EXISTA SEGUN SU NOMBRE DE USUARIO
+            usuario = usuario.objects.get(nick=nick)
+            #SE COMPRUBA QUE LA CONTRASEÑA ALMACENADA ES IGUAL A LA INTRODUCIDA
+            if hash_password(pass1) == usuario.contraseña:
                 usuario.session_token = generate_token(usuario)
                 usuario.save()
             usuario.save()
+            #ENVIA EL TOKEN DE SESION CON UN 200 OK EN UN JSON
             return JsonResponse({'session_token': usuario.session_token}, status=200)
         except usuario.DoesNotExist:
             return JsonResponse({'error': 'La contraseña o el usuario no existen'}, status=400)
     return HttpResponse(status=405)
 
-def generate_token(usuario):
-    payload = {
-        'user_id': usuario.id_user,
-        'username': usuario.nickname
-    }
-    secret = 'secreto'
-    token = jwt.encode(payload, secret, algorithm='HS256')
-    # token = token.decode('utf-8')
-    return token
+
+
