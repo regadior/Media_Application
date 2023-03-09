@@ -6,6 +6,7 @@
 header{
     background-color: #0B252E;
     width: 100%;
+    height: 82px;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -29,7 +30,6 @@ header{
     display: flex;
     list-style: none;
     justify-content: space-between;
-    
 }
 .header_Link{
     text-decoration: none;
@@ -40,6 +40,21 @@ header{
     width: 45%;
 
 }
+
+/* INICIO ESTILOS DE LOS BOTONES DE LOGIN Y REGISTER */
+.header_perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_login{
+    background-color: #24629B;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+/* FIN ESTILOS DE LOS BOTONES DE LOGIN Y REGISTER */
 
 
 @media only screen and (min-width: 650px) and (max-width: 800px) {

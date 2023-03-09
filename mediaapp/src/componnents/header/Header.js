@@ -9,14 +9,17 @@ function Header() {
     <header>
       <div className='header2'>
         <div className='header_logo'>
-          <Link className='header_Link' to='/inicio'>Mediasto</Link>
+          <Link className='header_Link' to='/'>Mediasto</Link>
         </div>
         <ul className='header_nav'>
-          <li><Link className='header_Link' to='/inicio'>Buscar</Link></li>
+          <li><Link className='header_Link' to='/'>Buscar</Link></li>
           <li><Link className='header_Link' to={`/${usuario}/listas`}>Mis listas</Link></li>
         </ul>
         <div className='header_perfil'>
-          <Link className='header_Link' to={`/${usuario}`}><img src={usuarionolog} alt="User avatar" /></Link>
+          
+          <Link className='header_Link header_login' to={`/login`}>Login</Link>
+
+          {/* <Link className='header_Link' to={`/${usuario}`}><img src={usuarionolog} alt="User avatar" /></Link> */}
         </div>
       </div>
     </header>

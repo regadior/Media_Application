@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate  } from 'react-router-dom';//Para redirigir a una direccion sijn actualizar
+import { useNavigate } from 'react-router-dom';//Para redirigir a una direccion sijn actualizar
+import { Link } from 'react-router-dom'
 import './Login.css';
 function Login() {
-    const navigate = useNavigate ();
+    const navigate = useNavigate();
     const [error1, setError1] = useState("");
     const [error2, setError2] = useState("");
     const [nick, setNick] = useState("");
@@ -53,7 +54,7 @@ function Login() {
         <div className='Login'>
             <form onSubmit={handleSubmit} className='Login_form' >
                 <h2>Iniciar Sesión</h2>
-
+                
                 <div className='Login_box'>
                     <input type="text" id="Login_nickname" name="nickname" value={nick} onChange={e => setNick(e.target.value)} required></input>
                     <label>Nombre de usuario</label>
@@ -65,7 +66,9 @@ function Login() {
                     <label>Contraseña</label>
                     <p className='Login_error_sesion'>{error2}</p>
                 </div>
-
+                <div className='Login_cuenta'>
+                    No tienes cuenta? <Link className='header_Link' to={`/register`}>Crea una.</Link>
+                </div>
                 <div className='Login_boton'>
                     <input type="submit" value="Registrarse"></input>
                 </div>

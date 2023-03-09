@@ -28,8 +28,28 @@
 .Login_form>h2 {
     color: #fff;
     text-align: center;
-    margin-bottom: 10%;
+    margin-bottom: 30px;
 }
+
+/* INICIO ESTILOS PARA REDIRIGIR AL FORMULARIO */
+.Login_cuenta {
+    font-size: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.Login_cuenta>.header_Link {
+    margin-left: 5px;
+    font-size: 12px;
+    color: #67c2ff;
+}
+
+/* FIN ESTILOS PARA REDIRIGIR AL FORMULARIO */
+
 
 .Login_box {
     position: relative;
@@ -103,7 +123,7 @@
 /* FIN DAR ESTILOS AL BOTON */
 
 /* INICIO PARA DAR ESTILOS A LOS ERRORES DE EL FORMULARIO */
-.Login_error_sesion{
+.Login_error_sesion {
     color: #790e0e;
     font-size: 12px;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate  } from 'react-router-dom';//Para redirigir a una direccion sijn actualizar
+import { Link } from 'react-router-dom'
 import './Register.css';
 function Register() {
   const navigate = useNavigate ();
@@ -131,7 +132,9 @@ function Register() {
           <p className='Register_error_sesion'>{error6}</p>
           <p className='Register_error_sesion'>{error7}</p>
         </div>
-
+        <div className='Register_cuenta'>
+                    Ya tienes una cuenta? <Link className='header_Link' to={`/login`}>Iniciar sesión.</Link>
+                </div>
         <div className='Register_boton'>
           <input type="submit" value="Registrarse"></input>
         </div>

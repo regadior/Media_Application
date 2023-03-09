@@ -28,8 +28,27 @@
 .Register_form>h2 {
     color: #fff;
     text-align: center;
-    margin-bottom: 10%;
+    margin-bottom: 30px;
 }
+/* INICIO ESTILOS PARA REDIRIGIR AL FORMULARIO */
+.Register_cuenta {
+    font-size: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+.Register_cuenta>.header_Link {
+    margin-left: 5px;
+    font-size: 12px;
+    color: #67c2ff;
+}
+
+/* FIN ESTILOS PARA REDIRIGIR AL FORMULARIO */
+
 
 .Register_box {
     position: relative;
