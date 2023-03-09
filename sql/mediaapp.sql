@@ -13,8 +13,8 @@ contraseña varchar(3000) not null,
 descripcion varchar(3000),
 img_perfil varchar(500),
 img_banner varchar(500),
-session_token varchar(3000) not null,
-id_rol int not null
+session_token varchar(3000),
+id_rol int
 );
 
 #CREACIÓN DE UNA TABLA ROL_USUARIO

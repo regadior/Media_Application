@@ -53,8 +53,8 @@ class Usuario(models.Model):
     descripcion = models.CharField(max_length=3000, blank=True, null=True)
     img_perfil = models.CharField(max_length=500, blank=True, null=True)
     img_banner = models.CharField(max_length=500, blank=True, null=True)
-    session_token = models.CharField(max_length=3000)
-    id_rol = models.ForeignKey(RolUsuario, models.DO_NOTHING, db_column='id_rol')
+    session_token = models.CharField(max_length=3000, blank=True, null=True)
+    id_rol = models.ForeignKey(RolUsuario, models.DO_NOTHING, db_column='id_rol', blank=True, null=True)
 
     class Meta:
         managed = False
