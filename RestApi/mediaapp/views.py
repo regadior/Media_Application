@@ -1,5 +1,7 @@
 import json
 from .models import *
+from django.core.validators import validate_length #Funcion para comprobar la longitud
+import re #Módulo de Python que proporciona soporte para expresiones regulares
 import jwt
 import logging
 import hashlib
@@ -43,9 +45,29 @@ def register(request):
         if not all([nombre, apell, apell, nick, email, pass1, pass2]):
             return JsonResponse({'error': 'Faltan parámetros (campos incompletos)'}, status=400)
 
+        # COMPROBAR QUE EL NOMBRE TIENE DE 3 A 25 DIGITOS
+        if not(1<= len(nombre)<= 25):
+            return JsonResponse({'error': 'El campo Nombre debe tener entre 1 y 25 digitos'}, status=400)
+        
+        # COMPROBAR QUE EL APELLIDO ESTE EN EL FORMATO "apel1 apel2"
+        if not (1<= len(apell)<= 25):
+            return JsonResponse({'error': 'El campo Apellido debe tener entre 1 y 25 digitos'}, status=400)
+
+        # COMPROBAR QUE EL NOMBRE DE USUARIO TIENE DE 3 A 20 DIGITOS
+        if not(3<= len(nick)<= 25):
+            return JsonResponse({'error': 'El campo Nombre de usuario debe tener entre 1 y 25 digitos'}, status=400)
+
+        # COMPROBAR QUE EL EMAIL ES VÁLIDO
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            return JsonResponse({'error': 'El correo electrónico es inválido'}, status=400)
+        
         # Comprobamos que las contraseñas coinciden
         if pass1 != pass2:
             return JsonResponse({'error': 'Las contraseñas no coinciden'}, status=400)
+        
+        # COMPROBAR QUE LA CONTRASEÑA DE USUARIO TIENE DE 5 A 20 DIGITOS
+        if not(5<= len(pass1)<= 20):
+            return JsonResponse({'error': 'El campo Contraseña de usuario debe tener entre 5 y 20 digitos'}, status=400)
 
         # Comprobamos que el usuario no exista ya en la base de datos
         if usuario.objects.filter(nick=nick).exists():
