@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate  } from 'react-router-dom';//Para redirigir a una direccion sijn actualizar
 import './Register.css';
 function Register() {
+  const navigate = useNavigate ();
   const [error1, setError1] = useState("");
   const [error2, setError2] = useState("");
   const [error3, setError3] = useState("");
@@ -64,14 +66,14 @@ function Register() {
 
     return valid;
   }
-
+  //FUNCION QUE ENVIA EL FORMULARIO AL HACER CLIC
   const handleSubmit = async e => {
     e.preventDefault();
     if (!validateForm()) {
       return;
     }
     try {
-      const res = await axios.post('http://localhost:8000/api/register/', {
+      const res = await axios.post('http://localhost:8000/api/register/', { //post al endpoint de register
         nombre,
         apell,
         nick,
@@ -79,6 +81,7 @@ function Register() {
         pass1,
         pass2,
       });
+      navigate("/login"); //Redirigir a /login
     } catch (err) {
       if (err.response) {
         console.log(err.response.data.error);

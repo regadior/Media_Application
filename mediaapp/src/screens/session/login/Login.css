@@ -101,3 +101,12 @@
 
 
 /* FIN DAR ESTILOS AL BOTON */
+
+/* INICIO PARA DAR ESTILOS A LOS ERRORES DE EL FORMULARIO */
+.Login_error_sesion{
+    color: #790e0e;
+    font-size: 12px;
+}
+
+
+/* FIN PARA DAR ESTILOS A LOS ERRORES DE EL FORMULARIO */

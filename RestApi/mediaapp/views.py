@@ -26,7 +26,7 @@ def generate_token(usuario):
     }
     secret = 'secreto'
     token = jwt.encode(payload, secret, algorithm='HS256')
-    # token = token.decode('utf-8')
+    token = token.decode('utf-8')
     return token
 
 #VISTA PARA REGISTRAR A UN USUARIO AL ENDPOINT http://localhost:8000/api/register/
