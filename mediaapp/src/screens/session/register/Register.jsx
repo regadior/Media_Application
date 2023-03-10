@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate  } from 'react-router-dom';//Para redirigir a una direccion sijn actualizar
+import { useNavigate } from 'react-router-dom';//Para redirigir a una direccion sijn actualizar
 import { Link } from 'react-router-dom'
 import './Register.css';
 function Register() {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
   const [error1, setError1] = useState("");
   const [error2, setError2] = useState("");
   const [error3, setError3] = useState("");
@@ -60,7 +60,7 @@ function Register() {
       valid = false;
     }
     //COMPROBAR QUE LAS CONTRASEÑAS COINCIDEN
-    if (pass1!==pass2) {
+    if (pass1 !== pass2) {
       setError7("* Las contraseñas no coinciden.");
       valid = false;
     }
@@ -132,11 +132,12 @@ function Register() {
           <p className='Register_error_sesion'>{error6}</p>
           <p className='Register_error_sesion'>{error7}</p>
         </div>
-        <div className='Register_cuenta'>
-                    Ya tienes una cuenta? <Link className='header_Link' to={`/login`}>Iniciar sesión.</Link>
-                </div>
+        
         <div className='Register_boton'>
           <input type="submit" value="Registrarse"></input>
+        </div>
+        <div className='Register_cuenta'>
+          Ya tienes una cuenta? <Link className='header_Link' to={`/login`}>Iniciar sesión.</Link>
         </div>
       </form>
     </div>

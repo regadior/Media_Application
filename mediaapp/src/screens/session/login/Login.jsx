@@ -66,11 +66,15 @@ function Login() {
                     <label>Contraseña</label>
                     <p className='Login_error_sesion'>{error2}</p>
                 </div>
-                <div className='Login_cuenta'>
-                    No tienes cuenta? <Link className='header_Link' to={`/register`}>Crea una.</Link>
-                </div>
+                
                 <div className='Login_boton'>
                     <input type="submit" value="Registrarse"></input>
+                </div>
+                <div className='Login_cuenta'>
+                    Olvidaste la contraseña? <Link className='header_Link' to={`/register`}>Clica aqui.</Link>
+                </div>
+                <div className='Login_cuenta'>
+                    No tienes cuenta? <Link className='header_Link' to={`/register`}>Crea una.</Link>
                 </div>
             </form>
         </div>
